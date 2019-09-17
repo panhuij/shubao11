@@ -338,7 +338,7 @@ export default {
                 {
                   name: 'list',
                   path: '/partner/list',
-                  component: './editor/mind',
+                  component: './partner/list',
                 }
               ],
             },
