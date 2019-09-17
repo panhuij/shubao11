@@ -1,6 +1,7 @@
 import { Card, Form, Input, Select, Button, Table } from "antd";
 import React, { Fragment } from "react";
 import data from "../../data.json";
+import styles from "./index.less";
 const { Item } = Form;
 const { Option } = Select;
 
@@ -68,7 +69,7 @@ class EditorComponent extends React.Component {
     const { form } = this.props;
     return (
       <Fragment>
-        <Item label="用户名">
+        <Item label="用户名" className={styles.fromItem}>
           {form.getFieldDecorator("user_name", {
             rules: [
               {
@@ -77,7 +78,7 @@ class EditorComponent extends React.Component {
             ]
           })(<Input placeholder="请输入" />)}
         </Item>
-        <Item label="手机号">
+        <Item label="手机号" className={styles.fromItem}>
           {form.getFieldDecorator("user_tel", {
             rules: [
               {
@@ -86,7 +87,7 @@ class EditorComponent extends React.Component {
             ]
           })(<Input placeholder="请输入" />)}
         </Item>
-        <Item label="用户编号">
+        <Item label="用户编号" className={styles.fromItem}>
           {form.getFieldDecorator("user_id", {
             rules: [
               {
@@ -95,7 +96,7 @@ class EditorComponent extends React.Component {
             ]
           })(<Input placeholder="请输入" />)}
         </Item>
-        <Item label="所在地">
+        <Item label="所在地" className={styles.fromItem}>
           {form.getFieldDecorator("user_noun", {
             rules: [
               {
@@ -117,8 +118,10 @@ class EditorComponent extends React.Component {
     const { form } = this.props;
     return (
       <Card type="inner" size="small" bordered={false}>
-        <Form onSubmit={this.handleSubmit}>{this.renderNodeDetail()}</Form>
-        <div className="item">
+        <Form className={styles.content} onSubmit={this.handleSubmit}>
+          {this.renderNodeDetail()}
+        </Form>
+        <div className={styles.btns}>
           <Button type="primary">查询</Button>
           <Button>重制</Button>
           <Button type="primary" icon="plus">
