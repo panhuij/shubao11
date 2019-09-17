@@ -144,7 +144,6 @@ class Add extends Component {
               </Form.Item>
               <Form.Item label="地址">
                 {getFieldDecorator("residence", {
-                  initialValue: ["zhejiang", "hangzhou", "xihu"],
                   rules: [
                     {
                       type: "array",
@@ -164,10 +163,14 @@ class Add extends Component {
                       message: "Please input your address"
                     }
                   ]
-                })(<TextArea placeholder="详细地址" />)}
+                })(<TextArea placeholder="详细地址" rows="4" />)}
               </Form.Item>
               <Form.Item label="开始时间">
-                {getFieldDecorator("date-picker", config)(<DatePicker />)}
+                {getFieldDecorator(
+                  "date-picker",
+                  { rules: [{ required: false }] },
+                  config
+                )(<DatePicker />)}
               </Form.Item>
               <Form.Item label="网站名称">
                 {getFieldDecorator("username", {
@@ -201,9 +204,7 @@ class Add extends Component {
                 >
                   提交
                 </Button>
-                <Button type="primary" htmlType="submit">
-                  保存
-                </Button>
+                <Button htmlType="submit">保存</Button>
               </Form.Item>
             </Form>
           </Content>
