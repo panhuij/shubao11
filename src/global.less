@@ -1,4 +1,4 @@
-@import '~antd/es/style/themes/default.less';
+@import "~antd/es/style/themes/default.less";
 
 html,
 body,
@@ -42,6 +42,15 @@ ol {
           display: block;
         }
       }
+    }
+  }
+}
+
+:global {
+  .ant-layout .ant-layout-has-sider {
+    height: 100vh;
+    aside {
+      height: 100vh;
     }
   }
 }
