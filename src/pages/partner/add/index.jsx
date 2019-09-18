@@ -33,15 +33,14 @@ class Add extends Component {
     confirmDirty: false,
     autoCompleteResult: []
   };
-  handleSubmit = () => {
-    console.log('校验表格');
-    this.props.form.validateFields((err, value)=>{
-      if (!err){
-        console.log('value...', value);
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      if (!err) {
+        console.log("Received values of form: ", values);
       }
     });
   };
-
   render() {
     const { getFieldDecorator } = this.props.form;
     const { autoCompleteResult } = this.state;
@@ -124,18 +123,25 @@ class Add extends Component {
           <Content style={{ padding: "24px" }}>
             <Form
               {...formItemLayout}
-              onSubmit={()=>this.handleSubmit()}
-              style={{ width: "100%", background: "#fff", padding: "30px" }}
+              onSubmit={this.handleSubmit}
+              style={{ background: "#fff", padding: "30px" }}
             >
               <Form.Item label="姓名">
                 {getFieldDecorator("username", {
-                  rules: [{ message: "Please input your username!" }]
-                })(<Input placeholder="请输入姓名" />)}
+                  rules: [
+                    { required: true, message: "Please input your username!" }
+                  ]
+                })(<Input placeholder="Username" />)}
               </Form.Item>
               <Form.Item label="电话">
                 {getFieldDecorator("phone", {
-                  rules: [{ message: "Please input your phone number!" }]
-                })(<Input placeholder="请输入电话" />)}
+                  rules: [
+                    {
+                      required: true,
+                      message: "Please input your phone number!"
+                    }
+                  ]
+                })(<Input />)}
               </Form.Item>
               <Form.Item label="邮箱">
                 {getFieldDecorator("email", {
@@ -149,26 +155,24 @@ class Add extends Component {
                       message: "Please input your E-mail!"
                     }
                   ]
-                })(<Input placeholder="请输入邮箱" />)}
+                })(<Input />)}
               </Form.Item>
               <Form.Item label="地址">
                 {getFieldDecorator("residence", {
                   rules: [
                     {
                       type: "array",
+                      required: true,
                       message: "Please select your habitual residence!"
                     }
                   ]
                 })(<Cascader options={residences} placeholder="请输入地址" />)}
               </Form.Item>
               <Form.Item label="详细地址">
-                {getFieldDecorator("email", {
+                {getFieldDecorator("address", {
                   rules: [
                     {
-                      type: "email",
-                      message: "The input is not valid address!"
-                    },
-                    {
+                      required: true,
                       message: "Please input your address"
                     }
                   ]
@@ -177,24 +181,30 @@ class Add extends Component {
               <Form.Item label="开始时间">
                 {getFieldDecorator(
                   "date-picker",
-                  { rules: [{ required: false }] },
+                  { rules: [{ required: true }] },
                   config
                 )(<DatePicker />)}
               </Form.Item>
               <Form.Item label="网站名称">
-                {getFieldDecorator("username", {
-                  rules: [{ message: "Please input your username!" }]
+                {getFieldDecorator("webname", {
+                  rules: [
+                    { required: true, message: "Please input your webname!" }
+                  ]
                 })(<Input placeholder="请输入网站名称" />)}
               </Form.Item>
               <Form.Item label="账号">
-                {getFieldDecorator("username", {
-                  rules: [{ message: "Please input your username!" }]
+                {getFieldDecorator("account", {
+                  rules: [
+                    { required: true, message: "Please input your account!" }
+                  ]
                 })(<Input placeholder="请输入账号" />)}
               </Form.Item>
               <Form.Item label="密码">
                 {getFieldDecorator("password", {
-                  rules: [{ message: "Please input your Password!" }]
-                })(<Input placeholder="请输入密码" />)}
+                  rules: [
+                    { required: true, message: "Please input your Password!" }
+                  ]
+                })(<Input type="password" placeholder="请输入密码" />)}
               </Form.Item>
               <Form.Item label="邀请人（选填）">
                 <Input placeholder="请输入邀请人" />
@@ -213,7 +223,7 @@ class Add extends Component {
                 >
                   提交
                 </Button>
-                <Button htmlType="submit">保存</Button>
+                <Button>保存</Button>
               </Form.Item>
             </Form>
           </Content>
