@@ -25,13 +25,13 @@ export default () => (
         </Col>
       </Row>
       <Row type="flex" className={styles.editorBd}>
-        <Col span={20} className={styles.editorContent}>
+        {/* <Col span={20} className={styles.editorContent}>
           <Mind data={data} className={styles.mind} />
         </Col>
         <Col span={4} className={styles.editorSidebar}>
           <MindDetailPanel />
           <EditorMinimap />
-        </Col>
+        </Col> */}
       </Row>
       <MindContextMenu />
     </GGEditor>
